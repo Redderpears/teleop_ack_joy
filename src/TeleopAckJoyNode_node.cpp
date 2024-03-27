@@ -7,7 +7,7 @@ TeleopAckJoyNode::TeleopAckJoyNode(const rclcpp::NodeOptions& options) : Node("T
     joy_sub =
         this->create_subscription<sensor_msgs::msg::Joy>("/joy", 5, std::bind(&TeleopAckJoyNode::joy_cb, this, _1));
 
-    ackermann_pub = this->create_publisher<ackermann_msgs::msg::AckermannDrive>("/nav_ack_vel", 1);
+    ackermann_pub = this->create_publisher<ackermann_msgs::msg::AckermannDrive>("/ack_vel", 1);
 }
 
 void TeleopAckJoyNode::joy_cb(sensor_msgs::msg::Joy::SharedPtr outputs) {
@@ -16,7 +16,7 @@ void TeleopAckJoyNode::joy_cb(sensor_msgs::msg::Joy::SharedPtr outputs) {
     float left_stick_lr_val = outputs->axes.at(0);
     float right_trigger_val = -outputs->axes.at(5);
 
-    command.steering_angle = map_input(left_stick_lr_val, -1, 1, -0.40, 0.40);
+    command.steering_angle = map_input(left_stick_lr_val, -1, 1, -0.2733, 0.2733);
     command.speed = map_input(right_trigger_val, -1, 1, 0, 5);
 
     ackermann_pub->publish(command);
