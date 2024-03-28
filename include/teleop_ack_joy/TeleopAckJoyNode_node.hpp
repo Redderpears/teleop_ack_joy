@@ -12,6 +12,15 @@ private:
     // Pub
     rclcpp::Publisher<ackermann_msgs::msg::AckermannDrive>::SharedPtr ackermann_pub;
 
+    // Parameters
+    int throttle_axis;
+    int steering_axis;
+    float min_axis_input;
+    float max_axis_input;
+    float min_steering_angle;
+    float max_steering_angle;
+    float max_speed;
+
 public:
     TeleopAckJoyNode(const rclcpp::NodeOptions& options);
 
