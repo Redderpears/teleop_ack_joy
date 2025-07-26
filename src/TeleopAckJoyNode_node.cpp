@@ -28,7 +28,7 @@ void TeleopAckJoyNode::joy_cb(sensor_msgs::msg::Joy::SharedPtr outputs) {
     float steering = outputs->axes.at(steering_axis);
 
     command.steering_angle =
-        map_input(steering, min_axis_input, max_axis_input, min_steering_angle, max_steering_angle);    
+        map_input(steering, min_axis_input, max_axis_input, min_steering_angle, max_steering_angle);
     command.speed = map_input(throttle, min_axis_input, max_axis_input, -max_speed, max_speed);
 
     ackermann_pub->publish(command);
